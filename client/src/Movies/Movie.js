@@ -25,17 +25,19 @@ export default class Movie extends Component {
         console.error(error);
       });
   };
- 
-   componentWillReceiveProps(newProps){
-     if(this.props.match.params.id !== newProps.match.params.id){
-       this.fetchMovie(newProps.match.params.id);
-     }
-   }
 
-   saveMovie = () => {
-     const addToSavedList = this.props.addToSavedList;
-     addToSavedList(this.state.movie)
-   }
+  componentWillReceiveProps(newProps) {
+    if (this.props.match.params.id !== newProps.match.params.id) {
+      this.fetchMovie(newProps.match.params.id);
+    }
+  }
+
+  saveMovie = () => {
+    const addToSavedList = this.props.addToSavedList;
+    if (!this.props.savedList.includes(this.state.movie)) {
+      addToSavedList(this.state.movie);
+    }
+  };
 
   render() {
     if (!this.state.movie) {
@@ -52,7 +54,12 @@ export default class Movie extends Component {
           metascore={metascore}
           stars={stars}
         />
-        <div onClick={() => this.props.addToSavedList(this.state.movie)} className="save-button">Save</div>
+        <div
+          onClick={() => this.props.addToSavedList(this.state.movie)}
+          className="save-button"
+        >
+          Save
+        </div>
       </div>
     );
   }

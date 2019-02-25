@@ -45,6 +45,14 @@ body {
   margin-right: 10px;
 }
 
+.saved-list a {
+  text-decoration: none;
+}
+
+.saved-list span {
+  color: black;
+}
+
 .saved-movie {
   margin: 0 10px;
 }
